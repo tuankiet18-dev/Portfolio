@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden dot-grid"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden dot-grid"
     >
       {/* Orange radial spotlight */}
       <div
@@ -22,7 +22,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Badge */}
-        <div className="animate-fade-in inline-flex items-center gap-2 bg-[#141414] border border-[#27272a] rounded-full px-4 py-1.5 mb-8">
+        <div className="animate-fade-in inline-flex items-center gap-2 bg-[#141414] border border-[#27272a] rounded-full px-4 py-1.5 mt-12 mb-8">
           <span className="flex items-center gap-1.5 text-xs font-mono text-[#f97316]">
             <Server size={11} />
             Backend
