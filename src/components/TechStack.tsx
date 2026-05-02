@@ -166,8 +166,8 @@ export default function TechStack() {
             Tools I build with
           </h2>
           <p className="mt-2 text-[#52525b] text-sm font-mono max-w-xl">
-            A focused toolkit for shipping reliable backend services and
-            resilient cloud infrastructure.
+            Technologies I've been working with through coursework,
+            personal projects, and my internship experience.
           </p>
         </div>
 
@@ -314,7 +314,7 @@ export default function TechStack() {
                   letterSpacing: "0.2em",
                 }}
               >
-                AWS Services Experience
+                AWS Services Used
               </span>
               <div
                 style={{

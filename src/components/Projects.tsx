@@ -38,7 +38,7 @@ const projects: Project[] = [
     id: "smartinvoice",
     title: "SmartInvoice Shield",
     subtitle:
-      "Multi-tenant SaaS & AI-powered tax-risk assessment (AWS FCAJ Internship)",
+      "Multi-tenant SaaS & tax-risk assessment platform (AWS FCAJ Internship)",
     role: "Backend & Cloud Developer Intern",
     badge: "Internship",
     badgeColor: "bg-amber-400/15 text-amber-300 border-amber-400/30",
@@ -61,10 +61,10 @@ const projects: Project[] = [
     problem:
       "Manual tax-risk assessment of invoices was slow, error-prone, and didn't scale across tenants with varying compliance rules.",
     solution: [
-      "Architected 3 CI/CD pipelines via Docker / GitHub Actions for automated deployment to AWS Elastic Beanstalk and ECS Fargate.",
-      "Designed an async communication layer via AWS SQS decoupling .NET ingestion from a Python OCR microservice.",
+      "Set up 3 CI/CD pipelines using Docker and GitHub Actions for automated deployment to AWS Elastic Beanstalk and ECS Fargate.",
+      "Built an async communication layer using AWS SQS to decouple .NET ingestion from a Python OCR microservice.",
       "Implemented a manual verification workflow for high-risk invoices with SNS notifications.",
-      "Secured multi-tenant data via AWS Cognito RBAC with fine-grained role policies.",
+      "Configured multi-tenant data isolation using AWS Cognito RBAC with role-based access policies.",
     ],
     impact: [
       "Zero data loss on pipeline",
@@ -109,10 +109,10 @@ const projects: Project[] = [
     problem:
       "EV drivers needed real-time visibility into station availability and a secure, seamless way to process payments — all through a single unified platform.",
     solution: [
-      "Engineered performant RESTful APIs with .NET 9 following Clean Architecture principles.",
-      "Integrated VNPay e-wallet gateway for seamless, secure payment transactions.",
-      "Used SignalR WebSockets to push real-time charging status updates with sub-second latency.",
-      "Implemented JWT-based authentication & role-based authorization via ASP.NET Identity.",
+      "Built RESTful APIs with .NET 9 following Clean Architecture principles.",
+      "Integrated VNPay e-wallet gateway for secure payment transactions.",
+      "Used SignalR WebSockets to push real-time charging status updates.",
+      "Implemented JWT-based authentication and role-based authorization via ASP.NET Identity.",
     ],
     impact: [
       "Real-time status via SignalR",
@@ -466,11 +466,11 @@ export default function Projects() {
             A look at recent systems
           </h2>
           <p className="mt-3 text-[#52525b] text-sm max-w-xl">
-            I've designed and shipped these end-to-end. Each follows a{" "}
+            Projects I worked on — as an intern and as a student. Each is structured around a{" "}
             <span className="font-mono text-[#f97316]">
               Problem → Solution → Impact
             </span>{" "}
-            structure.
+            to keep it honest and concrete.
           </p>
         </div>
 

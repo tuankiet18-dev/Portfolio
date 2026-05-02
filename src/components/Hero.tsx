@@ -54,11 +54,12 @@ export default function Hero() {
 
         {/* Tagline */}
         <p className="animate-fade-in-up delay-300 max-w-2xl mx-auto text-[#71717a] text-base md:text-lg leading-relaxed mb-10">
-          Building{' '}
-          <span className="text-[#fafafa] font-medium">scalable cloud-native architectures</span>
-          , automating{' '}
-          <span className="text-[#fafafa] font-medium">CI/CD workflows</span>, and leveraging{' '}
-          <span className="text-[#f97316] font-medium">GenAI</span> to accelerate development.
+          Final-year Software Engineering student focused on{' '}
+          <span className="text-[#fafafa] font-medium">.NET backend development</span>
+          {' '}and{' '}
+          <span className="text-[#fafafa] font-medium">cloud infrastructure</span>{' '}—
+          building real systems, learning fast, and growing through{' '}
+          <span className="text-[#f97316] font-medium">hands-on engineering</span>.
         </p>
 
         {/* CTAs */}

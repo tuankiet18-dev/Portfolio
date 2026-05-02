@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Cpu, Bot, Coffee } from 'lucide-react';
+import { GraduationCap, Cpu, Briefcase, Coffee } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const highlights = [
@@ -18,9 +18,9 @@ const highlights = [
     bg: 'bg-[#f97316]/10 border-[#f97316]/20',
   },
   {
-    icon: Bot,
-    label: 'AI-Augmented',
-    value: 'Gemini · ChatGPT',
+    icon: Briefcase,
+    label: 'Internship',
+    value: 'AWS · FCAJ 2025',
     color: 'text-violet-400',
     bg: 'bg-violet-400/10 border-violet-400/20',
   },
@@ -83,17 +83,16 @@ export default function About() {
                 <span className="text-[#fafafa] font-medium">final-year Software Engineering student</span>{' '}
                 at FPT University{' '}
                 <span className="font-mono text-[#f97316] text-sm">(GPA: 8.9/10)</span>{' '}
-                with a strong foundation in Data Structures, Algorithms, and Event-Driven Architecture.
+                with strong foundations in Data Structures, Algorithms, and{' '}
+                <span className="text-[#fafafa] font-medium">software design principles</span>.
               </p>
               <p className="text-[#a1a1aa] text-base leading-relaxed mt-4">
-                I specialize in the{' '}
+                I focus on the{' '}
                 <span className="text-[#fafafa] font-medium">.NET ecosystem</span> and{' '}
-                <span className="text-[#fafafa] font-medium">AWS cloud infrastructure</span>. I actively
-                integrate AI tools like{' '}
-                <span className="text-violet-300">Gemini</span> and{' '}
-                <span className="text-violet-300">ChatGPT</span> into my daily workflow to prototype,
-                debug, and optimize performance — shipping faster without compromising on architectural
-                quality.
+                <span className="text-[#fafafa] font-medium">AWS cloud infrastructure</span>.
+                During my internship, I worked on CI/CD pipelines, asynchronous messaging, and
+                multi-tenant systems — experiences that taught me to write cleaner, more{' '}
+                <span className="text-[#f97316] font-medium">production-ready code</span>.
               </p>
               <p className="text-[#a1a1aa] text-base leading-relaxed mt-4">
                 When I'm away from the keyboard, you can find me analyzing Real Madrid matches, hitting
@@ -123,7 +122,7 @@ export default function About() {
             {/* Quote */}
             <blockquote className="reveal delay-3 mt-4 border-l-2 border-[#f97316] pl-5 py-1" ref={quoteRef as React.RefObject<HTMLQuoteElement>}>
               <p className="font-mono text-sm text-[#52525b] italic">
-                "Good architecture is invisible. Great architecture scales."
+                "The best way to learn engineering is to ship something real."
               </p>
             </blockquote>
           </div>

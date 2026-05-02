@@ -56,11 +56,12 @@ export default function Footer() {
         >
           <span className="section-label">04 — Contact</span>
           <h2 className="mt-3 text-3xl md:text-4xl font-bold text-[#fafafa] mb-4">
-            Open to backend &amp; cloud roles
+            Looking for internship &amp; entry-level roles
           </h2>
           <p className="text-[#52525b] max-w-md mx-auto text-sm leading-relaxed mb-8">
-            Open to backend &amp; cloud roles, internships, and collaborative
-            projects. The fastest way to reach me is email.
+            I'm actively looking for backend or cloud internships and
+            entry-level opportunities. Open to collaborative projects too.
+            The fastest way to reach me is email.
           </p>
           <a
             href="mailto:luongtuankiet1801@gmail.com"
