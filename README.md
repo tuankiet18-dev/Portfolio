@@ -2,7 +2,7 @@
 
 Personal portfolio for my backend developer profile. The site presents my focus on .NET backend development, selected projects, technical stack, education, achievements, and contact information.
 
-Live site: [tuankiet.vercel.app](https://tuankiet.vercel.app/)
+Live site: [kietluong.vercel.app](https://kietluong.vercel.app/)
 
 ## About
 
