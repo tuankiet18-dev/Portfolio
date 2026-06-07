@@ -1,67 +1,81 @@
-# < David /> — Modern Developer Portfolio
+# Luong Tuan Kiet (David) - Portfolio
 
-A premium, high-performance developer portfolio built with **React**, **TypeScript**, and **Tailwind CSS**. Designed with a focus on clean aesthetics, smooth user experience, and cloud-first engineering mindset.
+Personal portfolio for my backend developer profile. The site presents my focus on .NET backend development, selected projects, technical stack, education, achievements, and contact information.
 
-![Portfolio Preview](https://tuankiet.vercel.app/images/smartinvoice-arch.jpg)
-> *Live Demo: [tuankiet.vercel.app](https://tuankiet.vercel.app/)*
+Live site: [tuankiet.vercel.app](https://tuankiet.vercel.app/)
 
-## 🚀 Overview
+## About
 
-This portfolio showcases my journey as a **Backend & Cloud Developer**. It combines a minimalist dark-themed design with advanced frontend techniques to provide an engaging experience for recruiters and technical leads.
+I am a final-year Software Engineering student focused on backend development, especially .NET, ASP.NET Core APIs, authentication, database-backed systems, and service boundaries.
 
-### Key Features
-- **Premium Aesthetics**: Lovable-inspired Amber & Black color palette (`#f97316`) for a professional, high-end feel.
-- **Scroll Reveal System**: Custom-built `useScrollReveal` hook using the **Intersection Observer API** for smooth content entry animations.
-- **Project Case Studies**: Structured using the **Problem-Solution-Impact (PSI)** framework, highlighting technical decision-making.
-- **Interactive Gallery**: Multi-image project showcase with tabbed navigation and Lightbox expansion.
-- **Modern Tech Stack**: Strictly typed with TypeScript and styled with utility-first CSS.
+This portfolio is designed to be minimal, direct, and recruiter-friendly while still having a distinct dark visual identity through a neural network background, subtle motion, and compact project cards.
 
-## 🛠️ Tech Stack
+## Sections
 
-- **Framework**: [React 18](https://reactjs.org/)
-- **Bundler**: [Vite](https://vitejs.dev/) (Lightning-fast HMR)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Animation**: Native CSS Keyframes + Intersection Observer
-- **Deployment**: [Vercel](https://vercel.com/)
+- About: short backend-focused introduction and profile details.
+- Tech Stack: Backend, Frontend, and Cloud & DevOps grouped by practical usage.
+- Projects: selected work ordered by recency.
+- Education & Achievements: degree, awards, and relevant certificates.
+- Contact: email, GitHub, LinkedIn, and location.
 
-## 📂 Project Structure
+## Selected Projects
+
+- InsightVault AI: document analysis workspace with upload, extraction, vector search, RAG chat, MinIO storage, and RabbitMQ jobs.
+- OneClick-Host: self-hosted deployment platform for generating Dockerfiles, building containers, routing traffic, and streaming logs.
+- SmartInvoice Shield: invoice risk processing system using .NET services, OCR coordination, AWS SQS, Cognito RBAC, Fargate, and CI/CD.
+- EV Charging Management: EV station platform with JWT-secured APIs, SignalR live status, VNPay payments, SQL Server, and Angular dashboard integration.
+
+## Tech Stack
+
+- Frontend: React, TypeScript, Vite, Tailwind CSS, Lucide React.
+- Backend focus shown in content: C#, .NET, ASP.NET Core, Entity Framework, SQL Server, PostgreSQL.
+- Supporting tools: AWS, Docker, Git, Linux.
+
+## Project Structure
 
 ```text
 src/
-├── components/     # Atomic UI components (Navbar, Hero, Projects, etc.)
-├── hooks/          # Custom reusable logic (useScrollReveal)
-├── assets/         # Static visual assets
-└── index.css       # Global design tokens & custom animations
+  components/        UI sections and reusable portfolio components
+  hooks/             Custom hooks for scroll reveal and neural background logic
+  assets/            Static assets
+  index.css          Global styles, design tokens, layout, and animations
+public/
+  certs/             Certificate files used by the portfolio
 ```
 
-## 🏗️ Getting Started
+## Getting Started
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+### Requirements
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/tuankiet18-dev/Portfolio.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+- Node.js 18+
+- npm
 
-## 📄 License
+### Install
 
-Distributed under the MIT License. See `LICENSE` for more information.
+```bash
+npm install
+```
 
----
-Developed with ☕ by [Luong Tuan Kiet (David)](https://github.com/tuankiet18-dev)
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Contact
+
+- Email: [luongtuankiet1801@gmail.com](mailto:luongtuankiet1801@gmail.com)
+- GitHub: [github.com/tuankiet18-dev](https://github.com/tuankiet18-dev)
+- LinkedIn: [linkedin.com/in/kietluong18](https://linkedin.com/in/kietluong18)
