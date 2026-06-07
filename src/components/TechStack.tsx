@@ -1,420 +1,168 @@
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
-type Skill = {
+const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
+type Tech = {
   name: string;
-  icon: string;
+  icon?: string;
 };
 
-type SkillCategory = {
-  category: string;
-  description: string;
-  accentColor: string;
-  glowColor: string;
-  bgGradient: string;
-  borderColor: string;
-  skills: Skill[];
+type SkillGroup = {
+  label: string;
+  title: string;
+  summary: string;
+  accent: string;
+  metric: string;
+  techs: Tech[];
 };
 
-const skillCategories: SkillCategory[] = [
+const skillGroups: SkillGroup[] = [
   {
-    category: "Backend",
-    description: "Core runtime & frameworks",
-    accentColor: "#f97316",
-    glowColor: "rgba(249,115,22,0.15)",
-    bgGradient: "linear-gradient(135deg, rgba(249,115,22,0.08) 0%, rgba(249,115,22,0.02) 100%)",
-    borderColor: "rgba(249,115,22,0.2)",
-    skills: [
-      { name: "C#", icon: "⬡" },
-      { name: "ASP.NET Core", icon: "◈" },
-      { name: "EF Core", icon: "⬛" },
-      { name: "SignalR", icon: "⚡" },
+    label: "Core",
+    title: "Backend",
+    summary:
+      "ASP.NET Core APIs, authentication, business logic, database access, and clean service boundaries.",
+    accent: "#f97316",
+    metric: ".NET / C# / SQL",
+    techs: [
+      { name: "C#", icon: `${DI}/csharp/csharp-original.svg` },
+      { name: ".NET", icon: `${DI}/dotnetcore/dotnetcore-original.svg` },
+      { name: "ASP.NET Core", icon: `${DI}/dotnetcore/dotnetcore-plain.svg` },
+      {
+        name: "Entity Framework",
+        icon: `${DI}/entityframeworkcore/entityframeworkcore-plain.svg`,
+      },
+      {
+        name: "SQL Server",
+        icon: `${DI}/microsoftsqlserver/microsoftsqlserver-plain.svg`,
+      },
+      { name: "PostgreSQL", icon: `${DI}/postgresql/postgresql-original.svg` },
     ],
   },
   {
-    category: "Cloud & Infrastructure",
-    description: "AWS services & databases",
-    accentColor: "#fbbf24",
-    glowColor: "rgba(251,191,36,0.15)",
-    bgGradient: "linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(251,191,36,0.02) 100%)",
-    borderColor: "rgba(251,191,36,0.2)",
-    skills: [
-      { name: "AWS Elastic Beanstalk", icon: "☁" },
-      { name: "ECS Fargate", icon: "⊞" },
-      { name: "S3", icon: "⬡" },
-      { name: "SQS", icon: "⇌" },
-      { name: "Cognito", icon: "⊙" },
-      { name: "RDS", icon: "⬛" },
-      { name: "PostgreSQL", icon: "⬢" },
-      { name: "SQL Server", icon: "⬣" },
+    label: "Interface",
+    title: "Frontend",
+    summary:
+      "React interfaces, API integration, dashboard screens, and typed UI workflows.",
+    accent: "#818cf8",
+    metric: "React / TS / UI",
+    techs: [
+      { name: "React", icon: `${DI}/react/react-original.svg` },
+      { name: "TypeScript", icon: `${DI}/typescript/typescript-original.svg` },
+      { name: "Vite", icon: `${DI}/vitejs/vitejs-original.svg` },
+      { name: "HTML5", icon: `${DI}/html5/html5-original.svg` },
+      { name: "CSS3", icon: `${DI}/css3/css3-original.svg` },
     ],
   },
   {
-    category: "DevOps & Tooling",
-    description: "CI/CD pipeline & containers",
-    accentColor: "#a78bfa",
-    glowColor: "rgba(167,139,250,0.15)",
-    bgGradient: "linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(167,139,250,0.02) 100%)",
-    borderColor: "rgba(167,139,250,0.2)",
-    skills: [
-      { name: "Docker", icon: "⬡" },
-      { name: "GitHub Actions", icon: "⚙" },
-      { name: "CI/CD", icon: "↻" },
-      { name: "Git", icon: "⎇" },
-      { name: "Linux", icon: "◉" },
+    label: "Delivery",
+    title: "Cloud & DevOps",
+    summary:
+      "Supporting tools I have used in projects and internship work for deployment, queues, and runtime operations.",
+    accent: "#38bdf8",
+    metric: "AWS / Docker / Git",
+    techs: [
+      {
+        name: "AWS",
+        icon: `${DI}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
+      },
+      { name: "Docker", icon: `${DI}/docker/docker-original.svg` },
+      { name: "Git", icon: `${DI}/git/git-original.svg` },
+      { name: "Linux", icon: `${DI}/linux/linux-original.svg` },
     ],
   },
 ];
 
-const awsServices = [
-  {
-    name: "Elastic Beanstalk",
-    abbr: "EB",
-    description: "App deployment platform",
-    gradientFrom: "#22c55e",
-    gradientTo: "#16a34a",
-    glowColor: "rgba(34,197,94,0.25)",
-    textColor: "#4ade80",
-    bgColor: "rgba(34,197,94,0.08)",
-    borderColor: "rgba(34,197,94,0.2)",
-  },
-  {
-    name: "ECS Fargate",
-    abbr: "ECS",
-    description: "Serverless containers",
-    gradientFrom: "#f97316",
-    gradientTo: "#ea580c",
-    glowColor: "rgba(249,115,22,0.25)",
-    textColor: "#fb923c",
-    bgColor: "rgba(249,115,22,0.08)",
-    borderColor: "rgba(249,115,22,0.2)",
-  },
-  {
-    name: "Simple Queue (SQS)",
-    abbr: "SQS",
-    description: "Message queuing service",
-    gradientFrom: "#eab308",
-    gradientTo: "#ca8a04",
-    glowColor: "rgba(234,179,8,0.25)",
-    textColor: "#facc15",
-    bgColor: "rgba(234,179,8,0.08)",
-    borderColor: "rgba(234,179,8,0.2)",
-  },
-  {
-    name: "S3 Storage",
-    abbr: "S3",
-    description: "Object storage service",
-    gradientFrom: "#0ea5e9",
-    gradientTo: "#0284c7",
-    glowColor: "rgba(14,165,233,0.25)",
-    textColor: "#38bdf8",
-    bgColor: "rgba(14,165,233,0.08)",
-    borderColor: "rgba(14,165,233,0.2)",
-  },
-  {
-    name: "Cognito IAM",
-    abbr: "COG",
-    description: "Identity & access mgmt",
-    gradientFrom: "#ec4899",
-    gradientTo: "#db2777",
-    glowColor: "rgba(236,72,153,0.25)",
-    textColor: "#f472b6",
-    bgColor: "rgba(236,72,153,0.08)",
-    borderColor: "rgba(236,72,153,0.2)",
-  },
-  {
-    name: "RDS Database",
-    abbr: "RDS",
-    description: "Managed relational DB",
-    gradientFrom: "#6366f1",
-    gradientTo: "#4f46e5",
-    glowColor: "rgba(99,102,241,0.25)",
-    textColor: "#818cf8",
-    bgColor: "rgba(99,102,241,0.08)",
-    borderColor: "rgba(99,102,241,0.2)",
-  },
-];
-
-export default function TechStack() {
-  const headerRef = useScrollReveal();
-  const skillsRef = useScrollReveal<HTMLDivElement>({ threshold: 0.05 });
-  const awsRef = useScrollReveal<HTMLDivElement>({ threshold: 0.05 });
+function TechMark({ tech }: { tech: Tech }) {
+  const fallback = tech.name
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
-    <section id="stack" className="py-28 px-6 bg-[#0d0d0d] relative overflow-hidden">
-      {/* Ambient background glow */}
-      <div
-        style={{
-          position: "absolute",
-          top: "20%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "600px",
-          height: "300px",
-          background: "radial-gradient(ellipse, rgba(249,115,22,0.04) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
+    <div className="stack-tech-mark">
+      <div className="stack-tech-icon" aria-hidden="true">
+        {tech.icon ? (
+          <>
+            <img
+              src={tech.icon}
+              alt=""
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.style.display = "none";
+                event.currentTarget.nextElementSibling?.classList.add(
+                  "is-visible",
+                );
+              }}
+            />
+            <span className="stack-tech-fallback">{fallback}</span>
+          </>
+        ) : (
+          <span className="stack-tech-fallback is-visible">{fallback}</span>
+        )}
+      </div>
+      <span className="stack-tech-name">{tech.name}</span>
+    </div>
+  );
+}
 
-      <div className="max-w-6xl mx-auto relative">
-        {/* Section header */}
-        <div
-          className="mb-16 reveal"
-          ref={headerRef as React.RefObject<HTMLDivElement>}
-        >
-          <span className="section-label">01 — Stack</span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-bold text-[#fafafa]">
-            Tools I build with
-          </h2>
-          <p className="mt-2 text-[#52525b] text-sm font-mono max-w-xl">
-            Technologies I've been working with through coursework,
-            personal projects, and my internship experience.
+function SkillCard({ group, index }: { group: SkillGroup; index: number }) {
+  const ref = useScrollReveal<HTMLElement>({ threshold: 0.08 });
+  const number = String(index + 1).padStart(2, "0");
+
+  return (
+    <article
+      ref={ref}
+      className="stack-skill-card reveal"
+      style={{ "--stack-accent": group.accent } as React.CSSProperties}
+    >
+      <div className="stack-card-topline">
+        <span>{number}</span>
+        <span>{group.label}</span>
+      </div>
+
+      <div className="stack-signal" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+
+      <h3>{group.title}</h3>
+      <p className="stack-summary">{group.summary}</p>
+
+      <div className="stack-metric">{group.metric}</div>
+
+      <div className="stack-tech-grid">
+        {group.techs.map((tech) => (
+          <TechMark key={tech.name} tech={tech} />
+        ))}
+      </div>
+    </article>
+  );
+}
+
+export default function TechStack() {
+  const headerRef = useScrollReveal<HTMLDivElement>();
+
+  return (
+    <section id="stack" className="stack-section section-glass">
+      <div className="max-w-6xl mx-auto">
+        <div className="stack-header reveal" ref={headerRef}>
+          <div>
+            <span className="section-label">01 / Stack</span>
+            <h2>Tech stack</h2>
+          </div>
+          <p>
+            My strongest area is backend development with .NET. I also use
+            frontend and cloud/devops tools when projects need dashboards,
+            deployment, queues, or runtime support.
           </p>
         </div>
 
-        {/* Skill categories */}
-        <div
-          className="reveal"
-          ref={skillsRef as React.RefObject<HTMLDivElement>}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {skillCategories.map(
-              ({
-                category,
-                description,
-                accentColor,
-                glowColor,
-                bgGradient,
-                borderColor,
-                skills,
-              }) => (
-                <div
-                  key={category}
-                  className="tech-category-card"
-                  style={{
-                    background: bgGradient,
-                    border: `1px solid ${borderColor}`,
-                    borderRadius: "16px",
-                    padding: "24px",
-                    position: "relative",
-                    overflow: "hidden",
-                    transition: "transform 0.25s ease, box-shadow 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = `0 20px 60px ${glowColor}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "none";
-                  }}
-                >
-                  {/* Top accent line */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: "2px",
-                      background: `linear-gradient(90deg, ${accentColor}, transparent)`,
-                    }}
-                  />
-
-                  {/* Category header */}
-                  <div style={{ marginBottom: "16px" }}>
-                    <span
-                      className="font-mono text-sm font-bold"
-                      style={{ color: accentColor }}
-                    >
-                      {category}
-                    </span>
-                    <p
-                      className="text-xs mt-1"
-                      style={{ color: "#52525b", fontFamily: "Fira Code, monospace" }}
-                    >
-                      {description}
-                    </p>
-                  </div>
-
-                  {/* Skill tags */}
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-                    {skills.map(({ name }) => (
-                      <span
-                        key={name}
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          padding: "6px 14px",
-                          borderRadius: "8px",
-                          fontSize: "0.74rem",
-                          fontFamily: "Fira Code, monospace",
-                          fontWeight: 500,
-                          color: "#c4c4c8",
-                          background: "rgba(255,255,255,0.05)",
-                          border: `1px solid ${borderColor}`,
-                          transition: "all 0.2s ease",
-                          cursor: "default",
-                          whiteSpace: "nowrap",
-                          letterSpacing: "0.01em",
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLSpanElement).style.color = "#fafafa";
-                          (e.currentTarget as HTMLSpanElement).style.background = `rgba(255,255,255,0.1)`;
-                          (e.currentTarget as HTMLSpanElement).style.borderColor = accentColor;
-                          (e.currentTarget as HTMLSpanElement).style.boxShadow = `0 0 12px ${borderColor}`;
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLSpanElement).style.color = "#c4c4c8";
-                          (e.currentTarget as HTMLSpanElement).style.background = "rgba(255,255,255,0.05)";
-                          (e.currentTarget as HTMLSpanElement).style.borderColor = borderColor;
-                          (e.currentTarget as HTMLSpanElement).style.boxShadow = "none";
-                        }}
-                      >
-                        {name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-
-        {/* AWS services grid */}
-        <div
-          className="reveal"
-          ref={awsRef as React.RefObject<HTMLDivElement>}
-          style={{ marginTop: "32px" }}
-        >
-          <div
-            style={{
-              borderRadius: "20px",
-              border: "1px solid rgba(249,115,22,0.12)",
-              background: "#111111",
-              padding: "32px",
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
-            {/* Section label */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "24px",
-              }}
-            >
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: "0.65rem",
-                  color: "#3f3f46",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                AWS Services Used
-              </span>
-              <div
-                style={{
-                  flex: 1,
-                  height: "1px",
-                  background: "linear-gradient(90deg, rgba(249,115,22,0.2), transparent)",
-                }}
-              />
-            </div>
-
-            {/* AWS cards grid */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                gap: "12px",
-              }}
-            >
-              {awsServices.map(
-                ({
-                  name,
-                  abbr,
-                  description,
-                  glowColor,
-                  textColor,
-                  bgColor,
-                  borderColor,
-                }) => (
-                  <div
-                    key={abbr}
-                    style={{
-                      borderRadius: "14px",
-                      border: `1px solid ${borderColor}`,
-                      background: bgColor,
-                      padding: "20px 16px",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      textAlign: "center",
-                      cursor: "default",
-                      transition: "transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease",
-                      position: "relative",
-                      overflow: "hidden",
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLDivElement;
-                      el.style.transform = "translateY(-6px) scale(1.02)";
-                      el.style.boxShadow = `0 16px 40px ${glowColor}`;
-                      el.style.borderColor = textColor;
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLDivElement;
-                      el.style.transform = "translateY(0) scale(1)";
-                      el.style.boxShadow = "none";
-                      el.style.borderColor = borderColor;
-                    }}
-                  >
-                    {/* Abbr */}
-                    <span
-                      className="font-mono font-bold"
-                      style={{
-                        fontSize: "1.4rem",
-                        color: textColor,
-                        letterSpacing: "0.05em",
-                        lineHeight: 1,
-                      }}
-                    >
-                      {abbr}
-                    </span>
-
-                    {/* Full name */}
-                    <span
-                      style={{
-                        fontSize: "0.74rem",
-                        fontWeight: 600,
-                        color: "#c4c4c8",
-                        marginTop: "8px",
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {name}
-                    </span>
-
-                    {/* Description */}
-                    <span
-                      className="font-mono"
-                      style={{
-                        fontSize: "0.64rem",
-                        color: "#6b6b74",
-                        marginTop: "5px",
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {description}
-                    </span>
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
+        <div className="stack-cockpit" aria-label="Technical skill areas">
+          {skillGroups.map((group, index) => (
+            <SkillCard key={group.title} group={group} index={index} />
+          ))}
         </div>
       </div>
     </section>
