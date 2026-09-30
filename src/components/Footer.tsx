@@ -1,119 +1,278 @@
-import { ArrowUpRight, GitFork, Link2, Mail, MapPin } from "lucide-react";
-import { useScrollReveal } from "../hooks/useScrollReveal";
+interface FooterProps {
+  onNavigate?: (section: string) => void;
+  onViewCertifications?: () => void;
+  onViewProjects?: () => void;
+}
 
-const contactLinks = [
-  {
-    id: "contact-email",
-    icon: Mail,
-    label: "Email",
-    value: "luongtuankiet1801@gmail.com",
-    href: "mailto:luongtuankiet1801@gmail.com",
-    tone: "orange",
-  },
-  {
-    id: "contact-github",
-    icon: GitFork,
-    label: "GitHub",
-    value: "github.com/tuankiet18-dev",
-    href: "https://github.com/tuankiet18-dev",
-    tone: "green",
-  },
-  {
-    id: "contact-linkedin",
-    icon: Link2,
-    label: "LinkedIn",
-    value: "linkedin.com/in/kietluong18",
-    href: "https://linkedin.com/in/kietluong18",
-    tone: "blue",
-  },
-  {
-    id: "contact-location",
-    icon: MapPin,
-    label: "Location",
-    value: "Thu Duc, HCMC, Vietnam",
-    href: null,
-    tone: "rose",
-  },
-];
+export default function Footer({ onNavigate, onViewCertifications, onViewProjects }: FooterProps) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
-export default function Footer() {
-  const year = new Date().getFullYear();
-  const headerRef = useScrollReveal<HTMLDivElement>();
-  const gridRef = useScrollReveal<HTMLDivElement>({ threshold: 0.08 });
+  const navLinks = [
+    {
+      label: "About",
+      onClick: () => {
+        if (onNavigate) onNavigate("hero");
+        else {
+          const el = document.getElementById("hero");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+          else scrollToTop();
+        }
+      },
+    },
+    {
+      label: "Projects",
+      onClick: () => {
+        if (onViewProjects) onViewProjects();
+        else if (onNavigate) onNavigate("projects");
+        else {
+          const el = document.getElementById("projects");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }
+      },
+    },
+    {
+      label: "Certifications",
+      onClick: () => {
+        if (onViewCertifications) onViewCertifications();
+        else if (onNavigate) onNavigate("certs");
+        else {
+          const el = document.getElementById("certs");
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }
+      },
+    },
+    {
+      label: "Contact",
+      href: "mailto:luongtuankiet1801@gmail.com",
+    },
+    {
+      label: "Resume",
+      href: "/KietLT_CV.pdf",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      href: "https://linkedin.com/in/tuankiet18",
+      icon: (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.225 0z" />
+        </svg>
+      ),
+    },
+    {
+      name: "GitHub",
+      href: "https://github.com/tuankiet18-dev",
+      icon: (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "Gmail",
+      href: "mailto:luongtuankiet1801@gmail.com",
+      icon: (
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2" />
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+        </svg>
+      ),
+    },
+  ];
 
   return (
-    <footer id="contact" className="footer-section">
-      <div className="portfolio-container">
-        <div className="footer-cta reveal" ref={headerRef}>
-          <span className="section-label">04 / Contact</span>
-          <h2>Open to backend opportunities.</h2>
-          <p>
-            I am looking for backend roles where I can build with .NET,
-            API design, authentication, database modelling, and clean service
-            boundaries.
-          </p>
-          <a
-            href="mailto:luongtuankiet1801@gmail.com"
-            className="btn-primary"
-            id="footer-email-cta"
+    <footer
+      id="contact"
+      className="surface-dark"
+      style={{
+        color: "#ffffff",
+        position: "relative",
+        zIndex: 20,
+        overflow: "hidden",
+        backgroundColor: "#0d0d0d",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "70px 24px 28px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          gap: 28,
+        }}
+      >
+        {/* Monogram Logo (TK) matching Euloge's HE styling */}
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTop();
+          }}
+          aria-label="Luong Tuan Kiet - Home"
+          style={{
+            display: "inline-flex",
+            transition: "transform 0.2s ease, opacity 0.2s ease",
+          }}
+          className="hover:scale-105 hover:opacity-90"
+        >
+          <svg
+            width="68"
+            height="46"
+            viewBox="0 0 68 46"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <Mail size={16} />
-            Email me
-            <ArrowUpRight size={14} />
-          </a>
-        </div>
+            {/* T letter */}
+            <rect x="2" y="3" width="28" height="8" fill="white" />
+            <rect x="12" y="11" width="8" height="32" fill="white" />
+            {/* K letter */}
+            <rect x="36" y="3" width="8" height="40" fill="white" />
+            <path
+              d="M44 23L57.5 3H67L52 25.5L67 43H57L44 27.5V23Z"
+              fill="white"
+            />
+          </svg>
+        </a>
 
-        <div className="contact-grid reveal-stagger" ref={gridRef}>
-          {contactLinks.map(({ id, icon: Icon, label, value, href, tone }) => {
-            const content = (
-              <>
-                <div className="contact-card-icon">
-                  <Icon size={18} />
-                </div>
-                <div>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </div>
-                {href && <ArrowUpRight className="contact-card-arrow" size={14} />}
-              </>
-            );
+        {/* Navigation Links in a single clean row */}
+        <nav
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "clamp(18px, 3.2vw, 36px)",
+          }}
+          aria-label="Footer navigation"
+        >
+          {navLinks.map((item) => {
+            const linkStyle: React.CSSProperties = {
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: 13.5,
+              fontWeight: 500,
+              letterSpacing: "-0.01em",
+              color: "rgba(255, 255, 255, 0.65)",
+              transition: "color 0.2s ease",
+              cursor: "pointer",
+              background: "none",
+              border: "none",
+              padding: 0,
+              textDecoration: "none",
+            };
 
-            if (href) {
+            if (item.href) {
               return (
                 <a
-                  key={id}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id={id}
-                  className="contact-card"
-                  data-tone={tone}
+                  key={item.label}
+                  href={item.href}
+                  target={item.target}
+                  rel={item.rel}
+                  style={linkStyle}
+                  className="hover:!text-white"
                 >
-                  {content}
+                  {item.label}
                 </a>
               );
             }
 
             return (
-              <div key={id} id={id} className="contact-card" data-tone={tone}>
-                {content}
-              </div>
+              <button
+                key={item.label}
+                type="button"
+                onClick={item.onClick}
+                style={linkStyle}
+                className="hover:!text-white"
+              >
+                {item.label}
+              </button>
             );
           })}
-        </div>
+        </nav>
 
-        <div className="footer-bottom">
-          <a href="#hero" className="nav-brand">
-            <span>&lt;</span>
-            <strong>David</strong>
-            <span>/&gt;</span>
-          </a>
-          <p>{year} Luong Tuan Kiet - Backend Developer</p>
-          <span className="footer-status">
-            <span />
-            Open to backend roles
-          </span>
+        {/* Social Links Row */}
+        <div
+          className="footer-social-links"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 12,
+          }}
+        >
+          {socialLinks.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={item.name}
+              style={{
+                color: "rgba(255, 255, 255, 0.55)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 32,
+                height: 32,
+                borderRadius: "50%",
+                background: "rgba(255, 255, 255, 0.04)",
+                border: "1px solid rgba(255, 255, 255, 0.06)",
+                transition: "all 0.2s ease",
+              }}
+              className="hover:!text-white hover:!bg-[rgba(255,255,255,0.12)] hover:scale-110"
+            >
+              {item.icon}
+            </a>
+          ))}
         </div>
+      </div>
+
+      {/* Hatched Pattern Divider Bar (Exact Euloge feature) */}
+      <div
+        style={{
+          width: "100%",
+          height: 32,
+          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          background:
+            "repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 9px)",
+        }}
+      />
+
+      {/* Bottom Copyright Text */}
+      <div style={{ padding: "24px 24px 32px", textAlign: "center" }}>
+        <p
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontSize: 12,
+            color: "rgba(255, 255, 255, 0.4)",
+            margin: 0,
+            letterSpacing: "0.01em",
+          }}
+        >
+          © 2026 Luong Tuan Kiet. All rights reserved.
+        </p>
       </div>
     </footer>
   );

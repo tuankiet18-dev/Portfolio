@@ -1,84 +1,40 @@
-import {
-  ArrowUpRight,
-  FileText,
-  GitFork,
-  Database,
-  Server,
-  Cpu,
-} from "lucide-react";
+import SlicedText from "./SlicedText";
 
 export default function Hero() {
   return (
-    <section id="hero" className="hero-section">
-      <div className="hero-shell">
-        <div className="hero-copy">
-          <div className="hero-kicker">
-            <span className="hero-kicker-dot" />
-            Backend Developer
+    <section id="hero" className="page-start surface-light">
+      <div>
+        {/* Intro Row: Photo on Left + Sliced Title on Right */}
+        <div className="about-hero__intro">
+          <div className="about-hero__photo">
+            <img
+              src="/images/avatar.jpg"
+              alt="Luong Tuan Kiet"
+            />
           </div>
 
-          <h1 className="hero-title">TUAN KIET</h1>
+          <h1 className="about-hero__title">
+            <span className="block">
+              <SlicedText text="HI, I’M" delayOffset={0} />
+            </span>
+            <span className="block">
+              <SlicedText text="TUAN KIET" delayOffset={180} />
+            </span>
+          </h1>
+        </div>
 
-          <div className="hero-cta-row">
-            <a
-              href="https://github.com/tuankiet18-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-              id="hero-github-btn"
-            >
-              <GitFork size={15} />
-              GitHub
-              <ArrowUpRight size={14} />
-            </a>
-            <a
-              href="/KietLT_CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-              id="hero-resume-btn"
-            >
-              <FileText size={15} />
-              Resume
-            </a>
+        {/* Summary Row: ME Tag on Left + Paragraph on Right */}
+        <div className="about-hero__summary">
+          <div>
+            <span className="about-hero__label">ME</span>
           </div>
-
-          {/* Floating Cards */}
-          <div className="floating-card float-1">
-            <div className="floating-card-icon">
-              <Server size={18} />
-            </div>
-            <div className="floating-card-info">
-              <span>Primary</span>
-              <strong>.NET Backend</strong>
-            </div>
-          </div>
-          <div className="floating-card float-2">
-            <div className="floating-card-icon">
-              <Cpu size={18} />
-            </div>
-            <div className="floating-card-info">
-              <span>Language</span>
-              <strong>C#</strong>
-            </div>
-          </div>
-          <div className="floating-card float-3">
-            <div className="floating-card-icon">
-              <Database size={18} />
-            </div>
-            <div className="floating-card-info">
-              <span>Data</span>
-              <strong>PostgreSQL</strong>
-            </div>
-          </div>
-          <div className="floating-card float-4">
-            <div className="floating-card-icon">
-              <Server size={18} />
-            </div>
-            <div className="floating-card-info">
-              <span>Style</span>
-              <strong>Clean APIs</strong>
-            </div>
+          <div className="about-hero__copy">
+            <p>
+              I’m a final-year Software Engineering student focused on backend development with C#/.NET and cloud-native architecture on AWS.
+            </p>
+            <p>
+              I like building systems where correctness and throughput both matter — event-driven pipelines, idempotent processing, and APIs that stay fast under real load. My recent work includes a serverless exam platform load-tested at p95 &lt; 175ms under 200 concurrent users, and an event-driven invoice pipeline processing documents through S3, SQS, and ECS Fargate.
+            </p>
           </div>
         </div>
       </div>
