@@ -1,20 +1,47 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, GitFork, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, GitFork, ExternalLink, Trophy, PlayCircle } from "lucide-react";
 import ShutterTitle from "./ShutterTitle";
+import { getCompetition } from "../data/competitions";
 
 export interface ProjectItem {
   id: string;
   title: string;
-  category: "Cloud & Serverless" | "Cloud & Platform" | "Enterprise & AWS" | "IoT & Telemetry" | "AI & Vector RAG" | "Systems & Security";
+  category: "Cloud & Serverless" | "Cloud & Platform" | "Enterprise & AWS" | "IoT & Telemetry" | "AI & Vector RAG" | "Systems & Security" | "Data & Optimization";
   shortDescription: string;
   fullDescription: string;
   year: string;
   stack: string[];
   highlightMetric?: string;
   image: string;
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
+  /** Pitch video, demo recording, or slides. Useful for hackathon projects without a live site. */
+  demoUrl?: string;
+  /** id from COMPETITIONS when the project was built for a competition. */
+  competitionId?: string;
+}
+
+const COMPETITIONS_FILTER = "Competitions";
+
+const projectUrl = (p: ProjectItem) => p.githubUrl ?? p.liveUrl ?? p.demoUrl;
+
+const openUrl = (url?: string) => {
+  if (url) window.open(url, "_blank", "noopener,noreferrer");
+};
+
+function CompetitionBadge({ competitionId }: { competitionId: string }) {
+  const competition = getCompetition(competitionId);
+  if (!competition) return null;
+  return (
+    <span className="work-list__event-badge">
+      <Trophy size={11} />
+      <span>
+        {competition.shortName}
+        {competition.result && ` · ${competition.result}`}
+      </span>
+    </span>
+  );
 }
 
 export const ALL_PROJECTS: ProjectItem[] = [
@@ -42,6 +69,53 @@ export const ALL_PROJECTS: ProjectItem[] = [
     image: "/images/onthilab-preview.png",
     githubUrl: "https://github.com/tuankiet18-dev/on-thi-lab",
     liveUrl: "https://onthilab.id.vn",
+  },
+  {
+    id: "firecalendar",
+    title: "FireCalendar",
+    category: "Data & Optimization",
+    shortDescription:
+      "One consistent 2000–2025 fire calendar from MODIS and VIIRS satellite hotspots, built for NASA Space Apps Challenge 2026.",
+    fullDescription:
+      "Web app for the Harmonization of MODIS and VIIRS Hot Spots challenge. Simply adding both sensors makes fire appear to triple in 2012, so the app counts burning activity in one unit, the H3 cell-day, on a series where a data-team model converts MODIS detections to the VIIRS scale. Users pick a country, a drawn area, or coordinates to see fire maps, monthly and daily calendars, anomalies against typical years, and similar past seasons. A FastAPI and DuckDB API serves tables pre-built from about 12 GB of Parquet, behind an nginx cache on AWS EC2.",
+    year: "2026",
+    stack: [
+      "React · TypeScript",
+      "MapLibre · ECharts",
+      "FastAPI",
+      "DuckDB",
+      "H3 geospatial",
+      "Docker · Caddy · nginx",
+      "AWS EC2",
+    ],
+    highlightMetric: "12 GB of hotspots → one comparable series",
+    image: "/images/projects/firecalendar-preview.webp",
+    githubUrl: "https://github.com/tuankiet18-dev/Harmonization-of-MODIS-and-VIIRS-Hot-Spots",
+    competitionId: "nasa-space-apps-hcmc-2026",
+  },
+  {
+    id: "nordic-flow",
+    title: "Nordic Flow",
+    category: "Data & Optimization",
+    shortDescription:
+      "Lowest-cost supplier and warehouse allocation with a proven-optimal MILP, independent plan verification, and human approval.",
+    fullDescription:
+      "Decision-support MVP for a fictional Nordic building-materials distributor, built by team NEW AURA for the IT Consultant Challenge 2026 (top 4 of 160 teams). OR-Tools solves the weekly allocation as a MILP, an independent verifier checks demand, supply, capacity and lanes, and a planner must explain overrides and approve every plan before export. Each step is written to a hash-chained audit trail. For the final pitch the team answered a 30% budget cut with history replay: re-run past weeks against the plans actually shipped and apply a go/no-go gate before any live pilot.",
+    year: "2026",
+    stack: [
+      "Python",
+      "OR-Tools (MILP)",
+      "FastAPI",
+      "SQLite",
+      "React · Vite",
+      "Tailwind CSS",
+      "pytest · Playwright",
+    ],
+    highlightMetric: "Top 4 of 160 teams",
+    image: "/images/projects/nordicflow-preview.webp",
+    githubUrl: "https://github.com/tuankiet18-dev/Nordic-Flow",
+    demoUrl: "https://github.com/tuankiet18-dev/Nordic-Flow/blob/main/deliverables/MVP.mp4",
+    competitionId: "it-consultant-challenge-2026",
   },
   {
     id: "smartinvoice",
@@ -170,12 +244,17 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
     "IoT & Telemetry",
     "AI & Vector RAG",
     "Systems & Security",
+    "Data & Optimization",
+    // Shown only once at least one project is linked to a competition.
+    ...(ALL_PROJECTS.some((p) => p.competitionId) ? [COMPETITIONS_FILTER] : []),
   ];
 
   const filteredProjects =
     activeFilter === "All"
       ? ALL_PROJECTS
-      : ALL_PROJECTS.filter((p) => p.category === activeFilter);
+      : activeFilter === COMPETITIONS_FILTER
+        ? ALL_PROJECTS.filter((p) => p.competitionId)
+        : ALL_PROJECTS.filter((p) => p.category === activeFilter);
 
   const hoveredProject = hoveredIndex !== null ? filteredProjects[hoveredIndex] : null;
 
@@ -346,7 +425,11 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
                     />
                     <div className="work-list__floating-meta">
                       <span className="font-mono text-xs text-white/90 font-medium">
-                        Open GitHub README
+                        {hoveredProject.githubUrl
+                          ? "Open GitHub README"
+                          : hoveredProject.liveUrl
+                            ? "Open live site"
+                            : "Open demo"}
                       </span>
                       <ArrowUpRight size={13} className="text-[#e05e1b]" />
                     </div>
@@ -366,15 +449,15 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
                   key={project.id}
                   className={`work-list__row group ${isHovered ? "is-active" : ""}`}
                   onMouseEnter={() => setHoveredIndex(idx)}
-                  onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
+                  onClick={() => openUrl(projectUrl(project))}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
-                      window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+                      openUrl(projectUrl(project));
                     }
                   }}
-                  aria-label={`View ${project.title} on GitHub`}
+                  aria-label={`View ${project.title}`}
                 >
                   {/* Column 1: Title & Mobile Thumbnail */}
                   <div className="work-list__col-title">
@@ -394,6 +477,9 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
 
                   {/* Column 2: Short Description & Tech Badges */}
                   <div className="work-list__col-desc">
+                    {project.competitionId && (
+                      <CompetitionBadge competitionId={project.competitionId} />
+                    )}
                     <p className="work-list__desc-text">
                       {project.shortDescription}
                     </p>
@@ -432,19 +518,35 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
                           <span>Live</span>
                         </button>
                       )}
-                      <button
-                        type="button"
-                        className="work-list__link-pill github-pill"
-                        title="View GitHub Repository & README"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(project.githubUrl, "_blank", "noopener,noreferrer");
-                        }}
-                      >
-                        <GitFork size={12} />
-                        <span>Code</span>
-                        <ArrowUpRight size={11} />
-                      </button>
+                      {project.demoUrl && (
+                        <button
+                          type="button"
+                          className="work-list__link-pill live-pill"
+                          title="View demo or pitch"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openUrl(project.demoUrl);
+                          }}
+                        >
+                          <PlayCircle size={12} />
+                          <span>Demo</span>
+                        </button>
+                      )}
+                      {project.githubUrl && (
+                        <button
+                          type="button"
+                          className="work-list__link-pill github-pill"
+                          title="View GitHub Repository & README"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openUrl(project.githubUrl);
+                          }}
+                        >
+                          <GitFork size={12} />
+                          <span>Code</span>
+                          <ArrowUpRight size={11} />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -464,7 +566,7 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
             >
               <div
                 className="group block cursor-pointer"
-                onClick={() => window.open(project.githubUrl, "_blank", "noopener,noreferrer")}
+                onClick={() => openUrl(projectUrl(project))}
               >
                 {/* Minimal 16:10 Thumbnail */}
                 <div className="aspect-[16/10] overflow-hidden rounded-xl border border-black/10 bg-black/5 transition duration-300 group-hover:border-black/30 group-hover:shadow-md">
@@ -489,6 +591,12 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
                   </span>
                 </div>
 
+                {project.competitionId && (
+                  <div className="mt-2">
+                    <CompetitionBadge competitionId={project.competitionId} />
+                  </div>
+                )}
+
                 {/* Short Description */}
                 <p className="mt-1.5 text-sm text-[#5c5852] line-clamp-2 leading-relaxed">
                   {project.shortDescription}
@@ -504,7 +612,7 @@ export default function AllProjects({ onBack }: AllProjectsProps) {
                       className="inline-flex items-center gap-1 text-[11px] text-[#e05e1b] hover:underline"
                       onClick={(e) => {
                         e.stopPropagation();
-                        window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+                        openUrl(project.liveUrl);
                       }}
                     >
                       <span>Live Site</span>

@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutPin from "./components/AboutPin";
 import AllProjects from "./components/AllProjects";
+import Competitions from "./components/Competitions";
 import Certifications from "./components/Certifications";
 import AllCertifications from "./components/AllCertifications";
 import Footer from "./components/Footer";
@@ -108,6 +109,9 @@ export default function App() {
 
           {/* 2. 340vh Sticky Pinned Card (Academic, Experience, Stack, Info) */}
           <AboutPin />
+
+          {/* Competitions & Hackathons with photo lightbox */}
+          <Competitions onViewProject={navigateToWork} />
 
           {/* 3. Professional Certifications & Honors Horizontal Track + Modal */}
           <Certifications onViewAll={navigateToCertifications} />

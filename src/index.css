@@ -2124,3 +2124,216 @@ body {
     border-top-color: rgba(255, 255, 255, 0.1);
   }
 }
+
+/* ─── Competitions & Hackathons (compact list) ─── */
+.competitions {
+  padding: 72px 0 24px;
+}
+
+.competitions .certs__header {
+  margin-bottom: 32px;
+}
+
+.competitions__list {
+  list-style: none;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+.competitions__row {
+  display: grid;
+  grid-template-columns: 132px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+.competitions__thumb-btn {
+  position: relative;
+  width: 132px;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 6px;
+  background: var(--bg-dark);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.competitions__thumb-btn:disabled {
+  cursor: default;
+}
+
+.competitions__thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.competitions__row:hover .competitions__thumb-btn img {
+  transform: scale(1.05);
+}
+
+.competitions__photo-count {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.competitions__content {
+  min-width: 0;
+}
+
+.competitions__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.competitions__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 4px;
+}
+
+.competitions__title-row h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #171717;
+}
+
+.competitions__content > p {
+  margin: 6px 0 0;
+  color: #555550;
+  font-size: 14px;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.competitions__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.competitions__result,
+.work-list__event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-glow);
+  color: #b4440c;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.work-list__event-badge {
+  margin-bottom: 6px;
+}
+
+.work-list__row.is-active .work-list__event-badge {
+  background: rgba(224, 94, 27, 0.25);
+  color: #ffb48a;
+}
+
+@media (max-width: 640px) {
+  .competitions__row {
+    grid-template-columns: 96px 1fr;
+    align-items: start;
+    gap: 14px;
+  }
+
+  .competitions__thumb-btn {
+    width: 96px;
+  }
+
+  .competitions__actions {
+    grid-column: 2;
+  }
+}
+
+.competitions__lightbox {
+  max-width: 1040px;
+}
+
+.competitions__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.competitions__nav:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.competitions__thumb {
+  flex: 0 0 72px;
+  height: 48px;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: none;
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.competitions__thumb.is-active,
+.competitions__thumb:hover {
+  opacity: 1;
+}
+
+.competitions__thumb.is-active {
+  border-color: var(--accent);
+}
+
+.competitions__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

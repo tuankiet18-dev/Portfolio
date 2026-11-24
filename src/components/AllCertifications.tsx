@@ -434,6 +434,27 @@ export const ALL_CERTIFICATIONS: DetailedCertItem[] = [
     ],
   },
   {
+    id: "nasa-space-apps-2026",
+    category: "Award",
+    badgeImg: "/certs/nasa-space-apps-logo.png",
+    badgeAlt: "NASA Space Apps Challenge",
+    title: "Galactic Problem Solver — NASA Space Apps Challenge 2026",
+    description:
+      "Certificate from the 2026 NASA Space Apps Challenge for participation and efforts to address challenges on Earth and in space.",
+    issuer: "NASA Space Apps Challenge",
+    obtained: "November 14–15, 2026",
+    previewImg: "/images/events/nasa-space-apps-2026/certificate.webp",
+    fileUrl: "/images/events/nasa-space-apps-2026/certificate.png",
+    fileType: "image",
+    verifyUrl: "/images/events/nasa-space-apps-2026/certificate.png",
+    keyPoints: [
+      "NASA Space Apps Challenge 2026",
+      "Galactic Problem Solver",
+      "Ho Chi Minh City local event",
+      "November 14–15, 2026",
+    ],
+  },
+  {
     id: "hackathon-semifinal",
     category: "Award",
     badgeImg: "/certs/hackathon-logo.svg",

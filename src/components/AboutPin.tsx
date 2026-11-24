@@ -206,7 +206,7 @@ export default function AboutPin() {
                       <span>2024 – 2026</span>
                     </div>
                     <p>
-                      Semifinalist (Top 8 of 250+ teams) at The Finnovative Hackathon 2026. Top 15 of 600+ participants at the F-CODE TALENT 2024 programming contest.
+                      Top 4 of 160 teams at the IT Consultant Challenge 2026. Semifinalist (Top 8 of 250+ teams) at The Finnovative Hackathon 2026. Built FireCalendar at NASA Space Apps Challenge HCMC 2026. Top 15 of 600+ participants at the F-CODE TALENT 2024 programming contest.
                     </p>
                   </li>
                 </ul>
