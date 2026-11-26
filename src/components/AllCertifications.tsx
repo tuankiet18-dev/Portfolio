@@ -587,6 +587,20 @@ const getCourseCertificate = (courseTitle: string) => {
   );
 };
 
+// Course certificates that belong to a specialization are not listed on their own;
+// they stay reachable from the specialization's curriculum list in the modal.
+const SPECIALIZATION_COURSES = new Set(
+  ALL_CERTIFICATIONS.filter((cert) => cert.category === "Specialization").flatMap((cert) =>
+    (cert.courses ?? []).map(normalizeCourseTitle),
+  ),
+);
+
+const LISTED_CERTIFICATIONS = ALL_CERTIFICATIONS.filter(
+  (cert) =>
+    cert.category !== "Course Certificate" ||
+    !SPECIALIZATION_COURSES.has(normalizeCourseTitle(cert.title)),
+);
+
 interface AllCertificationsProps {
   onBack: () => void;
 }
@@ -605,8 +619,8 @@ export default function AllCertifications({ onBack }: AllCertificationsProps) {
 
   const filteredCerts =
     activeFilter === "All"
-      ? ALL_CERTIFICATIONS
-      : ALL_CERTIFICATIONS.filter((c) => c.category === activeFilter);
+      ? LISTED_CERTIFICATIONS
+      : LISTED_CERTIFICATIONS.filter((c) => c.category === activeFilter);
 
   // Close modal on Escape key press
   useEffect(() => {
